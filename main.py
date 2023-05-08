@@ -92,6 +92,7 @@ def Main():
         while b < turns:
             # every turn #
             Attack()
+            time.sleep(1)
             ButtonClick()
             time.sleep(11)
             b += 1
