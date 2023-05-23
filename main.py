@@ -12,22 +12,15 @@ def SelectParty(counter):
         pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
 
 def SelectFight():
-    pynput.mouse.Controller().position = (467, 505); time.sleep(0.5)
-    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
-    pynput.mouse.Controller().position = (612, 506); time.sleep(0.5)
-    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
-    pynput.mouse.Controller().position = (751, 508); time.sleep(0.5)
-    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
-    pynput.mouse.Controller().position = (977, 505); time.sleep(0.5)
-    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
-    pynput.mouse.Controller().position = (1029, 505); time.sleep(0.5)
-    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
+    m = 300
+    while m <= 1200:
+        pynput.mouse.Controller().position = (m, 484); time.sleep(0.1)
+        pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.1)
+        m += 70
     pynput.mouse.Controller().position = (1530, 845); time.sleep(0.5)
     pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
 
 def SelectBossFight():
-    pynput.mouse.Controller().position = (768, 219); time.sleep(0.5)
-    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
     pynput.mouse.Controller().position = (1530, 845); time.sleep(0.5)
     pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
 
@@ -46,18 +39,19 @@ def Finish():
     pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
 
 def Attack():
-    pynput.mouse.Controller().position = (965, 722); time.sleep(0.5)
-    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
     pynput.mouse.Controller().position = (778, 489); time.sleep(0.5)
     pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
-    pynput.mouse.Controller().position = (995, 291); time.sleep(0.5)
-    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
+    # not for every mercenary
+    # pynput.mouse.Controller().position = (995, 291); time.sleep(0.5)
+    # pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
 
-def ButtonClick():
+def EndTurn():
     pynput.mouse.Controller().position = (1567, 503); time.sleep(0.5)
     pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
 
 def FinishFight():
+    pynput.mouse.Controller().position = (100, 100); time.sleep(0.5)
+    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(1)
     pynput.mouse.Controller().position = (100, 100); time.sleep(0.5)
     pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(7)
 
@@ -79,7 +73,7 @@ def Initialize(mercenary):
         return None
     
 def Main():
-    fights = 3; counter = 0; 
+    fights = 3; counter = 0
     mercenary = input("Provide a name of a mercenary you wish to start the run with: ")
     mercenary = Initialize(mercenary)
     if (mercenary == None):
@@ -89,7 +83,7 @@ def Main():
         time.sleep(5)
         while 1:
             # every bounty #
-            print("Bounties completed in this run: " + str(counter))
+            # print("Bounties completed in this run: " + str(counter))
             SelectBounty()
             time.sleep(3)
             SelectParty(counter)
@@ -97,37 +91,41 @@ def Main():
             m = 0
             while m < fights:
                 # every normal fight #
-                SelectFight()
-                time.sleep(20)
-                # Await() # for farming exp instead of coins
-                ButtonClick()
+                if (m == 0):
+                    pynput.mouse.Controller().position = (1530, 845); time.sleep(0.5)
+                    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.5)
+                else:    
+                    SelectFight()
+                time.sleep(19)
+                Await() # for farming exp instead of coins
+                EndTurn()
                 time.sleep(10)
                 n = 0
                 while n < mercenary.turns:
                     # every turn #
                     Attack()
                     time.sleep(1)
-                    ButtonClick()
+                    EndTurn()
                     time.sleep(12)
                     n += 1
                     # every turn #
                 FinishFight()
                 time.sleep(3)
                 SelectPower()
-                time.sleep(3)
+                time.sleep(4)
                 m += 1
                 # every normal fight #
             SelectBossFight()
-            time.sleep(20)
-            # Await() # for farming exp instead of coins
-            ButtonClick()
+            time.sleep(19)
+            Await() # for farming exp instead of coins
+            EndTurn()
             time.sleep(10)
             b = 0
             while b < mercenary.boss_turns:
                 # every turn #
                 Attack()
                 time.sleep(1)
-                ButtonClick()
+                EndTurn()
                 time.sleep(12)
                 b += 1
                 # every turn #

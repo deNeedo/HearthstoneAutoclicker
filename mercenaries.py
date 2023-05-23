@@ -9,3 +9,9 @@ class Millhouse:
         self.name = "Millhouse"
         self.turns = 1
         self.boss_turns = 3
+
+class Cairne:
+    def __init__(self):
+        self.name = "Cairne"
+        self.turns = 4
+        self.boss_turns = 5
