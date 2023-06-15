@@ -1,2 +1,2 @@
 # HearthstoneAutoclicker
-A simple farming tool for Mercenaries game mode in Hearthstone
+A simple farming tool for Hearthstone's Mercenaries game mode
