@@ -1,4 +1,23 @@
-import pynput, time, mercenaries
+import pynput, time; 
+#, time, numpy, cv2, pyautogui; 
+import mercenaries; 
+
+# def CompareImages(image1, image2):
+#   amount = 0; 
+#   for m in range(1080):
+#      for n in range(1920):
+#         value = 0; 
+#         for b in range(3):
+#            value += abs(int(image1[m][n][b]) - int(image2[m][n][b])); 
+#         amount += (765 - value) / 765; 
+#   return "Identity coefficient: " + str(amount / (1080 * 1920));
+#
+# cv2.imread
+# time.sleep(1); image1 = cv2.cvtColor(numpy.array(pyautogui.screenshot()), cv2.COLOR_RGB2BGR);  
+# time.sleep(2); image2 = cv2.cvtColor(numpy.array(pyautogui.screenshot()), cv2.COLOR_RGB2BGR); 
+# # test = abs(image1 - image2)
+# # print(sum(sum(sum(test))))
+# print("Screenshots taken!"); print(CompareImages(image1, image2)); 
 
 def PlayButton():
     pynput.mouse.Controller().position = (1470, 900); time.sleep(0.1)
@@ -7,7 +26,7 @@ def PlayButton():
 def SelectParty(counter):
     PlayButton()
     if (counter == 0):
-        pynput.mouse.Controller().position = (845, 631); time.sleep(0.1)
+        time.sleep(0.1); pynput.mouse.Controller().position = (845, 631); time.sleep(0.1)
         pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(0.1)
 
 def SelectFight():
@@ -54,14 +73,26 @@ def SelectPower():
     pynput.mouse.Controller().position = (1127, 925); time.sleep(0.1)
     pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(3)
 
-def Await():
-    t = 60*28; time.sleep(t)
+def Await(minutes):
+    t = 60*minutes; time.sleep(t)
+
+def Retire():
+    pynput.mouse.Controller().position = (796, 1000); time.sleep(0.1)
+    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(1)
+    pynput.mouse.Controller().position = (1094, 796); time.sleep(0.1)
+    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(1)
+    pynput.mouse.Controller().position = (844, 617); time.sleep(0.1)
+    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(4)
+    pynput.mouse.Controller().position = (844, 617); time.sleep(0.1)
+    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(2)
 
 def Initialize(mercenary):
     if mercenary == "Xyrella":
         return mercenaries.Xyrella()
     elif mercenary == "Millhouse":
         return mercenaries.Millhouse()
+    elif mercenary == "Vanessa":
+        return mercenaries.Vanessa()
     else:
         return None
     
@@ -89,7 +120,7 @@ def Main():
                     SelectFight()
                     PlayButton()
                 time.sleep(17)
-                # Await() # for farming exp instead of coins
+                Await(28) # for farming exp instead of coins
                 EndTurn()
                 n = 0
                 while n < mercenary.turns:
@@ -103,24 +134,25 @@ def Main():
                 SelectPower()
                 m += 1
                 # every normal fight #
-            PlayButton()
-            time.sleep(17)
-            # Await() # for farming exp instead of coins
-            EndTurn()
-            b = 0
-            while b < mercenary.boss_turns:
-                # every turn #
-                Attack(mercenary.targeting)
-                time.sleep(1)
-                EndTurn()
-                b += 1
-                # every turn #
-            FinishFight()
-            time.sleep(7)
-            CollectTreasure()
-            time.sleep(3)
-            Finish()
-            time.sleep(3)
-            counter += 1
+            Retire()
+            # PlayButton()
+            # time.sleep(17)
+            # Await(28) # for farming exp instead of coins
+            # EndTurn()
+            # b = 0
+            # while b < mercenary.boss_turns:
+            #     # every turn #
+            #     Attack(mercenary.targeting)
+            #     time.sleep(1)
+            #     EndTurn()
+            #     b += 1
+            #     # every turn #
+            # FinishFight()
+            # time.sleep(7)
+            # CollectTreasure()
+            # time.sleep(3)
+            # Finish()
+            # time.sleep(3)
+            # counter += 1
             # every bounty #
 Main()
