@@ -65,6 +65,10 @@ def FinishFight():
     pynput.mouse.Controller().position = (100, 100); time.sleep(0.1)
     pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(1)
     pynput.mouse.Controller().position = (100, 100); time.sleep(0.1)
+    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(1)
+    pynput.mouse.Controller().position = (100, 100); time.sleep(0.1)
+    pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(1)
+    pynput.mouse.Controller().position = (100, 100); time.sleep(0.1)
     pynput.mouse.Controller().click(pynput.mouse.Button.left, 1); time.sleep(7)
 
 def SelectPower():
